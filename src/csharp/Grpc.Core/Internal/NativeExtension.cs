@@ -95,9 +95,24 @@ namespace Grpc.Core.Internal
             string runtimesDirectory = string.Format("runtimes/{0}/native", GetPlatformString());
             var netCorePublishedAppStylePath = Path.Combine(assemblyDirectory, runtimesDirectory, GetNativeLibraryFilename());
             var netCoreAppStylePath = Path.Combine(assemblyDirectory, "../..", runtimesDirectory, GetNativeLibraryFilename());
+            var unityPluginsPathEditorOsx = Path.Combine(Directory.GetCurrentDirectory(), 
+                                                "Assets/ML-Agents/Plugins/ProtoBuffer/runtimes/osx/native", 
+                                                GetNativeLibraryFilename());
+            var unityPluginsPathEditorWin = Path.Combine(Directory.GetCurrentDirectory(), 
+                                                "Assets/ML-Agents/Plugins/ProtoBuffer/runtimes/win/native", 
+                                                GetNativeLibraryFilename());
+            var unityPluginsPathEditorLinux = Path.Combine(Directory.GetCurrentDirectory(), 
+                                                "Assets/ML-Agents/Plugins/ProtoBuffer/runtimes/win/native", 
+                                                GetNativeLibraryFilename());
+            var unityPluginsPathOsx = Path.Combine(assemblyDirectory, "../../..", "Plugins", GetNativeLibraryFilename());
+            var unityPluginsPathWin = Path.Combine(assemblyDirectory, "..", "Plugins", GetNativeLibraryFilename());
+            var unityPluginsPathLinux1 = Path.Combine(assemblyDirectory, "..", "Plugins", "x86_64", GetNativeLibraryFilename());
+            var unityPluginsPathLinux2 = Path.Combine(assemblyDirectory, "..", "Plugins", "x86", GetNativeLibraryFilename());
 
-            // Look for the native library in all possible locations in given order.
-            string[] paths = new[] { classicPath, netCorePublishedAppStylePath, netCoreAppStylePath};
+            // Look for all native library in all possible locations in given order.
+            string[] paths = new[] { classicPath, netCorePublishedAppStylePath, netCoreAppStylePath,
+                               unityPluginsPathEditorOsx, unityPluginsPathEditorWin, unityPluginsPathEditorLinux,
+                               unityPluginsPathOsx, unityPluginsPathWin, unityPluginsPathLinux1, unityPluginsPathLinux2};
             return new UnmanagedLibrary(paths);
         }
 
@@ -201,7 +216,7 @@ namespace Grpc.Core.Internal
             }
             if (PlatformApis.IsMacOSX)
             {
-                return string.Format("libgrpc_csharp_ext.{0}.dylib", architecture);
+                return string.Format("libgrpc_csharp_ext.{0}.bundle", architecture);
             }
             throw new InvalidOperationException("Unsupported platform.");
         }
