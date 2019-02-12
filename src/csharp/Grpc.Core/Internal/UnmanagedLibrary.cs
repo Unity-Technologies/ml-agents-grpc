@@ -92,6 +92,7 @@ namespace Grpc.Core.Internal
                     return IntPtr.Zero;
                 }
             }
+#if !UNITY_WINDOWS
             if (PlatformApis.IsLinux)
             {
                 if (PlatformApis.IsMono)
@@ -108,6 +109,7 @@ namespace Grpc.Core.Internal
             {
                 return MacOSX.dlsym(this.handle, symbolName);
             }
+#endif
             throw new InvalidOperationException("Unsupported platform.");
         }
 
@@ -203,6 +205,7 @@ namespace Grpc.Core.Internal
         /// dlopen and dlsym from the current process as on Linux
         /// Mono sure is linked against these symbols.
         /// </summary>
+#if !UNITY_WINDOWS
         private static class Mono
         {
             [DllImport("__Internal")]
@@ -211,6 +214,7 @@ namespace Grpc.Core.Internal
             [DllImport("__Internal")]
             internal static extern IntPtr dlsym(IntPtr handle, string symbol);
         }
+#endif
 
         /// <summary>
         /// Similarly as for Mono on Linux, we load symbols for
