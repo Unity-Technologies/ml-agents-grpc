@@ -1,4 +1,8 @@
-[![Build Status](https://grpc-testing.appspot.com/job/gRPC_master/badge/icon)](https://grpc-testing.appspot.com/job/gRPC_master)
+Unity ML-Agents compatible gRPC branch
+======================================
+
+This branch contains changes from `v1.10.x` to make it compatible with Unity and [ML-Agents](https://github.com/Unity-Technologies/ml-agents). To update the `Grpc.Core` folder in ML-Agents, drag [this folder](https://github.com/Unity-Technologies/ml-agents-grpc/tree/ml-agents-master/src/csharp/Grpc.Core) into your project files
+
 
 [gRPC - An RPC library and framework](http://github.com/grpc/grpc)
 ===================================
