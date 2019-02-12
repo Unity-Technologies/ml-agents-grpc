@@ -1,5 +1,12 @@
 gRPC - An RPC library and framework
-===================================
+=======
+Unity ML-Agents compatible gRPC branch
+======================================
+
+This branch contains changes from `v1.10.x` to make it compatible with Unity and [ML-Agents](https://github.com/Unity-Technologies/ml-agents). To update the `Grpc.Core` folder in ML-Agents, drag [this folder](https://github.com/Unity-Technologies/ml-agents-grpc/tree/ml-agents-master/src/csharp/Grpc.Core) into your project files
+
+
+[gRPC - An RPC library and framework](http://github.com/grpc/grpc)
 
 gRPC is a modern, open source, high-performance remote procedure call (RPC) framework that can run anywhere. It enables client and server applications to communicate transparently, and makes it easier to build connected systems.
 

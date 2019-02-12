@@ -22,6 +22,22 @@ using System.Diagnostics;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Threading;
+//using AOT;
+
+//namespace AOT
+//{
+//    /// <summary> Mono AOT compiler detects this attribute by name and generates required wrappers for
+//    /// native->managed callbacks. Works only for static methods. </summary>
+//    [System.AttributeUsage(System.AttributeTargets.Method)]
+//    public class MonoPInvokeCallbackAttribute : Attribute
+//    {
+//        /// <summary>
+//        /// Constructor for MonoPInvokeCallbackAttribute.
+//        /// </summary>
+//        /// <param name="type">The type of delegate signature used for the native callback.</param>
+//        public MonoPInvokeCallbackAttribute(Type type) { }
+//    }
+//}
 
 namespace Grpc.Core.Internal
 {
@@ -39,7 +55,7 @@ namespace Grpc.Core.Internal
         /// <summary>
         /// Redirects logs from native gRPC C core library to a general logger.
         /// </summary>
-        public static void Redirect(NativeMethods native)
+        internal static void Redirect(NativeMethods native)
         {
             lock (staticLock)
             {
@@ -52,7 +68,7 @@ namespace Grpc.Core.Internal
         }
 
         [MonoPInvokeCallback(typeof(GprLogDelegate))]
-        private static void HandleWrite(IntPtr fileStringPtr, int line, ulong threadId, IntPtr severityStringPtr, IntPtr msgPtr)
+        internal static void HandleWrite(IntPtr fileStringPtr, int line, ulong threadId, IntPtr severityStringPtr, IntPtr msgPtr)
         {
             try
             {
