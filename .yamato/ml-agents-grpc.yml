@@ -5,6 +5,7 @@ agent:
   flavor: b1.medium
 commands:
   - |
+    git submodule update --init
     brew install cmake autoconf automake libtool pkg-config
     ./unity/build_grpc_mac.sh
 artifacts:
