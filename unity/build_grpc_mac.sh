@@ -2,13 +2,13 @@
 # make sure an argument is passed
 set -o xtrace
 
+# apply the compiler flag patch to boringssl
+# assume we are in the repository root
+pushd third_party/boringssl/
+git apply ../../unity/bssl-01.patch
+popd
+
 for arch in x86_64 arm64; do
-    # apply the compiler flag patch to boringssl
-    # assume we are in the repository root
-    pushd third_party/boringssl/
-    git apply ../../unity/bssl-01.patch
-    popd
-    
     # start building with cmake
     # https://grpc.io/docs/languages/cpp/quickstart/
     mkdir -p cmake/build
