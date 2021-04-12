@@ -5,7 +5,12 @@ agent:
   flavor: b1.medium
 commands:
   - |
-    git submodule update --init
+    cd ..
+    git clone https://gitlab.kitware.com/cmake/cmake.git
+    push cmake
+    ./bootstrap && make && sudo make install
+    popd
+    cd ml-agents-grpc git submodule update --init
     brew install cmake autoconf automake libtool go
     ./unity/build_grpc_mac.sh
 artifacts:
