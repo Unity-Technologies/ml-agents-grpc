@@ -13,7 +13,7 @@ for arch in x86_64 arm64; do
     # https://grpc.io/docs/languages/cpp/quickstart/
     mkdir -p cmake/build
     pushd cmake/build
-    cmake -DgRPC_BUILD_TESTS=off -DCMAKE_OSX_ARCHITECTURES=$arch ../..
+    arch -arch $arch cmake -DgRPC_BUILD_TESTS=off -DCMAKE_OSX_ARCHITECTURES=$arch ../..
     make -j
     popd
     
