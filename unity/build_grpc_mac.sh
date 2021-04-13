@@ -11,9 +11,10 @@ popd
 for arch in x86_64 arm64; do
     # start building with cmake
     # https://grpc.io/docs/languages/cpp/quickstart/
+    rm -rf cmake/build
     mkdir -p cmake/build
     pushd cmake/build
-    cmake -DgRPC_BUILD_TESTS=off -DCMAKE_OSX_ARCHITECTURES=$arch ../..
+    cmake -DgRPC_BUILD_TESTS=off -DCMAKE_OSX_ARCHITECTURES=$arch -DCMAKE_CROSSCOMPILING=1 ../..
     make -j
     popd
     
