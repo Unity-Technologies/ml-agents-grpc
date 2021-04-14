@@ -4,23 +4,24 @@ set -o xtrace
 
 # apply the compiler flag patch to boringssl
 # assume we are in the repository root
-pushd third_party/boringssl/
+pushd third_party/boringssl/ || exit
 git apply ../../unity/bssl-01.patch
-popd
+popd || exit
 
-pushd third_party/protobuf/
+pushd third_party/protobuf/ || exit
 git apply ../../unity/protobuf.patch
-popd
+git cherry-pick cba18efe1861d1fc1eecd6dc2af86fc1f0d9922f
+popd || exit
 
 for arch in x86_64 arm64; do
     # start building with cmake
     # https://grpc.io/docs/languages/cpp/quickstart/
     rm -rf cmake/build
     mkdir -p cmake/build
-    pushd cmake/build
+    pushd cmake/build || exit
     cmake -DgRPC_BUILD_TESTS=off -DCMAKE_OSX_ARCHITECTURES=$arch -DCMAKE_CROSSCOMPILING=1 -DRUN_HAVE_STD_REGEX=0 -DRUN_HAVE_POSIX_REGEX=1 ../..
     make -j VERBOSE=1
-    popd
+    popd || exit
     
     # copy the file we want into the artifacts folder
     mkdir -p artifacts/grpc_$arch/
