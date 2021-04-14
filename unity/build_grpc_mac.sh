@@ -19,7 +19,13 @@ for arch in x86_64 arm64; do
     rm -rf cmake/build
     mkdir -p cmake/build
     pushd cmake/build || exit
-    cmake -DgRPC_BUILD_TESTS=off -DCMAKE_OSX_ARCHITECTURES=$arch -DCMAKE_CROSSCOMPILING=1 -DRUN_HAVE_STD_REGEX=0 -DRUN_HAVE_POSIX_REGEX=1 ../..
+    cmake -DgRPC_BUILD_TESTS=0 \
+    -DCMAKE_OSX_ARCHITECTURES=$arch \
+    -DCMAKE_CROSSCOMPILING=1 \
+    -DRUN_HAVE_STD_REGEX=0 \
+    -DRUN_HAVE_POSIX_REGEX=1 \
+    -Dprotobuf_BUILD_PROTOC_BINARIES=1 \
+    ../..
     make -j VERBOSE=1
     popd || exit
     
