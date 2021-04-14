@@ -22,17 +22,32 @@ using System.Diagnostics;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Threading;
-using AOT;
+//using AOT;
+
+//namespace AOT
+//{
+//    /// <summary> Mono AOT compiler detects this attribute by name and generates required wrappers for
+//    /// native->managed callbacks. Works only for static methods. </summary>
+//    [System.AttributeUsage(System.AttributeTargets.Method)]
+//    public class MonoPInvokeCallbackAttribute : Attribute
+//    {
+//        /// <summary>
+//        /// Constructor for MonoPInvokeCallbackAttribute.
+//        /// </summary>
+//        /// <param name="type">The type of delegate signature used for the native callback.</param>
+//        public MonoPInvokeCallbackAttribute(Type type) { }
+//    }
+//}
 
 namespace Grpc.Core.Internal
 {
-    internal delegate void GprLogDelegate(IntPtr fileStringPtr, int line, ulong threadId, IntPtr severityStringPtr, IntPtr msgPtr);
+    public delegate void GprLogDelegate(IntPtr fileStringPtr, int line, ulong threadId, IntPtr severityStringPtr, IntPtr msgPtr);
 
     /// <summary>
     /// Logs from gRPC C core library can get lost if your application is not a console app.
     /// This class allows redirection of logs to gRPC logger.
     /// </summary>
-    internal static class NativeLogRedirector
+    public static class NativeLogRedirector
     {
         static object staticLock = new object();
         static GprLogDelegate writeCallback;
@@ -52,8 +67,8 @@ namespace Grpc.Core.Internal
             }
         }
 
-        [MonoPInvokeCallback(typeof(GprLogDelegate))]
-        private static void HandleWrite(IntPtr fileStringPtr, int line, ulong threadId, IntPtr severityStringPtr, IntPtr msgPtr)
+        //[MonoPInvokeCallback(typeof(GprLogDelegate))]
+        public static void HandleWrite(IntPtr fileStringPtr, int line, ulong threadId, IntPtr severityStringPtr, IntPtr msgPtr)
         {
             try
             {

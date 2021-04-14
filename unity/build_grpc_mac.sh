@@ -20,13 +20,15 @@ for arch in x86_64 arm64; do
     mkdir -p cmake/build
     pushd cmake/build || exit
     cmake -DgRPC_BUILD_TESTS=0 \
+    -DCMAKE_BUILD_TYPE=Release \
     -DCMAKE_OSX_ARCHITECTURES=$arch \
     -DCMAKE_CROSSCOMPILING=1 \
     -DRUN_HAVE_STD_REGEX=0 \
     -DRUN_HAVE_POSIX_REGEX=1 \
+    -DRUN_HAVE_STEADY_CLOCK=0 \
     -Dprotobuf_BUILD_PROTOC_BINARIES=1 \
     ../..
-    make -j VERBOSE=1
+    make -j grpc_csharp_ext VERBOSE=1
     popd || exit
     
     # copy the file we want into the artifacts folder
