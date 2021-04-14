@@ -8,6 +8,10 @@ pushd third_party/boringssl/
 git apply ../../unity/bssl-01.patch
 popd
 
+pushd third_party/protobuf/
+git apply ../../unity/protobuf.patch
+popd
+
 for arch in x86_64 arm64; do
     # start building with cmake
     # https://grpc.io/docs/languages/cpp/quickstart/
