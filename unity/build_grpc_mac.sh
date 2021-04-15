@@ -13,13 +13,13 @@ git apply ../../unity/protobuf.patch
 git cherry-pick cba18efe1861d1fc1eecd6dc2af86fc1f0d9922f
 popd || exit
 
-for arch in x86_64 arm64; do
+for arch in x86_64 x86_64; do
     # start building with cmake
     # https://grpc.io/docs/languages/cpp/quickstart/
     rm -rf cmake/build
     mkdir -p cmake/build
     pushd cmake/build || exit
-    cmake -DgRPC_BUILD_TESTS=0 \
+    cmake -DgRPC_BUILD_TESTS=1 \
     -DCMAKE_BUILD_TYPE=Release \
     -DCMAKE_OSX_ARCHITECTURES=$arch \
     -DCMAKE_CROSSCOMPILING=1 \
@@ -33,7 +33,8 @@ for arch in x86_64 arm64; do
     
     # copy the file we want into the artifacts folder
     mkdir -p artifacts/grpc_$arch/
-    mv cmake/build/libgrpc_csharp_ext.dylib artifacts/grpc_$arch/libgrpc_csharp_ext.dylib
+    rm artifacts/grpc_$arch/libgrpc_csharp_ext.dylib
+    cp cmake/build/libgrpc_csharp_ext.dylib artifacts/grpc_$arch/libgrpc_csharp_ext.dylib
 done
 
 mkdir -p artifacts/grpc_universal/
