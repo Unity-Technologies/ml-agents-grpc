@@ -9,7 +9,8 @@ commands:
     brew install --cask cmake
     brew install --cask dotnet
     git submodule update --init
-    ./unity/build_grpc_mac.sh mac arm64 x86_64
+    ./unity/build_grpc_mac_linux.sh mac arm64 x86_64
+    ./unity/build_grpc_mac_linux.sh win
 artifacts:
   libraries:
     paths:
