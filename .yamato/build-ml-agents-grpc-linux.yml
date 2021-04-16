@@ -11,7 +11,7 @@ commands:
     rm dotnet-install.sh
     sudo apt install -y build-essential autoconf libtool pkg-config
     git submodule update --init
-    ./unity/build_grpc_mac.sh linux x86_64
+    ./unity/build_grpc_mac_linux.sh linux x86_64
 artifacts:
   libraries:
     paths:
