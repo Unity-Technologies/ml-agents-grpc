@@ -17,6 +17,8 @@
     <PackageLicenseUrl>https://github.com/grpc/grpc/blob/master/LICENSE</PackageLicenseUrl>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <Configurations>Debug;Release;Release_Win</Configurations>
+    <Platforms>AnyCPU</Platforms>
   </PropertyGroup>
 
   <Import Project="..\Grpc.Core\SourceLink.csproj.include" />

@@ -10,10 +10,9 @@ popd || exit
 
 pushd third_party/protobuf/ || exit
 git apply ../../unity/protobuf.patch
-git cherry-pick cba18efe1861d1fc1eecd6dc2af86fc1f0d9922f
 popd || exit
 
-for arch in x86_64 x86_64; do
+for arch in arm64 x86_64; do
     # start building with cmake
     # https://grpc.io/docs/languages/cpp/quickstart/
     rm -rf cmake/build
@@ -26,9 +25,8 @@ for arch in x86_64 x86_64; do
     -DRUN_HAVE_STD_REGEX=0 \
     -DRUN_HAVE_POSIX_REGEX=1 \
     -DRUN_HAVE_STEADY_CLOCK=0 \
-    -Dprotobuf_BUILD_PROTOC_BINARIES=1 \
     ../..
-    make -j grpc_csharp_ext VERBOSE=1
+    make -j8
     popd || exit
     
     # copy the file we want into the artifacts folder
