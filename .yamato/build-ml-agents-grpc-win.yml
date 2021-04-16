@@ -1,0 +1,22 @@
+name: Build gRPC x86_64/arm64 Universal Library
+agent:
+  type: Unity::VM
+  image: desktop/desktop-vs2017:v0.1.0-602685
+  flavor: b1.large
+commands:
+  - |
+    choco install nasm
+    choco install ninja
+    git submodule update --init
+    cd cmake
+    md build
+    md artifacts\native\win
+    cd build
+    call "%VS170COMNTOOLS%..\..\VC\vcvarsall.bat" x64
+    cmake ..\.. -GNinja -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=ON
+    cmake --build .
+    move *.dll ..\..\artifacts\native\win\
+artifacts:
+  libraries:
+    paths:
+      - "artifacts\**"
