@@ -19,4 +19,4 @@ commands:
 artifacts:
   libraries:
     paths:
-      - "artifacts\**"
+      - "artifacts/**"

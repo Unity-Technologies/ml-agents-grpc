@@ -5,11 +5,11 @@ agent:
   flavor: b1.medium
 commands:
   - |
-	sudo apt install -y cmake
-	wget -q -0 dotnet-install.sh https://dot.net/v1/dotnet-install.sh
-	bash dotnet-install.sh
-	rm dotnet-install.sh
-	sudo apt install -y build-essential autoconf libtool pkg-config
+    sudo apt install -y cmake
+    wget -q -0 dotnet-install.sh https://dot.net/v1/dotnet-install.sh
+    bash dotnet-install.sh
+    rm dotnet-install.sh
+    sudo apt install -y build-essential autoconf libtool pkg-config
     git submodule update --init
     ./unity/build_grpc_mac.sh linux x86_64
 artifacts:
