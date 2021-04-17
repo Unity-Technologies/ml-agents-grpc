@@ -48,6 +48,12 @@ if [ "$DELETE_ARTIFACTS" == "true" ]; then
     rm -rf artifacts ||:
 fi
 
+file_extension=".dylib"
+if [ "$platform" == "linux" ]; then
+    file_extension=".so"
+fi
+built_file="libgrpc_csharp_ext$file_extension"
+
 if [ "$platform" != "win" ]; then
     for arch in $arches; do
         # start building with cmake
@@ -68,16 +74,16 @@ if [ "$platform" != "win" ]; then
         
         # copy the file we want into the artifacts folder
         mkdir -p artifacts/native/$platform/grpc_$arch/
-        rm artifacts/native/$platform/grpc_$arch/libgrpc_csharp_ext.dylib ||:
-        cp cmake/build/libgrpc_csharp_ext.dylib artifacts/native/$platform/grpc_$arch/libgrpc_csharp_ext.dylib
+        rm artifacts/native/$platform/grpc_$arch/$built_file ||:
+        cp cmake/build/$built_file artifacts/native/$platform/grpc_$arch/$built_file
     done
     
     if [ "$platform" == "mac" ]; then
         mkdir -p artifacts/native/$platform/grpc_universal/
-        lipo -create -output artifacts/native/$platform/grpc_universal/libgrpc_csharp_ext.dylib \
-            artifacts/native/$platform/grpc_x86_64/libgrpc_csharp_ext.dylib artifacts/native/$platform/grpc_arm64/libgrpc_csharp_ext.dylib
+        lipo -create -output artifacts/native/$platform/grpc_universal/$built_file \
+            artifacts/native/$platform/grpc_x86_64/$built_file artifacts/native/$platform/grpc_arm64/$built_file
 
-        codesign -s - -f artifacts/native/$platform/grpc_universal/libgrpc_csharp_ext.dylib
+        codesign -s - -f artifacts/native/$platform/grpc_universal/$built_file
     fi
 fi
 
@@ -89,7 +95,7 @@ dll_out="artifacts/managed/mac_linux/"
 configuration="Release"
 # Build Linux and Mac DLLs
 if [ "$platform" == "win" ]; then
-    dll_out="artifacts/dlls/win"
+    dll_out="artifacts/managed/win"
     configuration="Release_Win"
 fi
 
