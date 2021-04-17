@@ -1,21 +1,15 @@
 #!/bin/bash
 # make sure an argument is passed
-set -o xtrace
+set -oe xtrace
 
 platform=$1
 arches=${@:2}
 
-if [ "$platform" != "win" ]; then
-    # apply the compiler flag patch to boringssl
-    # assume we are in the repository root
-    pushd third_party/boringssl/ || exit
-    git apply ../../unity/bssl-01.patch
-    popd || exit
-    
-    pushd third_party/protobuf/ || exit
-    git apply ../../unity/protobuf.patch
-    popd || exit
+pushd third_party/boringssl/
+git apply ../../unity/bssl-01.patch
+popd
 
+if [ "$platform" != "win" ]; then
     for arch in $arches; do
         # start building with cmake
         # https://grpc.io/docs/languages/cpp/quickstart/
@@ -48,6 +42,10 @@ if [ "$platform" != "win" ]; then
     fi
 fi
 
+pushd third_party/boringssl/
+git checkout .
+popd
+
 dll_out="artifacts/managed/mac_linux/"
 configuration="Release"
 # Build Linux and Mac DLLs
@@ -62,4 +60,3 @@ pushd src/csharp
 dotnet --version
 dotnet build Grpc.Core/Grpc.Core.csproj --configuration $configuration --output ../../$dll_out
 popd
-
