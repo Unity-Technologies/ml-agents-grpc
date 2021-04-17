@@ -99,9 +99,13 @@ if [ "$platform" == "win" ]; then
     configuration="Release_Win"
 fi
 
-rm -rf $dll_out ||:
-mkdir -p $dll_out
-pushd src/csharp
-dotnet --version
-dotnet build Grpc.Core/Grpc.Core.csproj --configuration $configuration --output ../../$dll_out
-popd
+# the mac and linux platform managed dlls are the same
+# and it's not as easy to get dotnet on a linux machine
+if [ "$platform" != "linux" ]; then
+    rm -rf $dll_out ||:
+    mkdir -p $dll_out
+    pushd src/csharp
+    dotnet --version
+    dotnet build Grpc.Core/Grpc.Core.csproj --configuration $configuration --output ../../$dll_out
+    popd
+fi
