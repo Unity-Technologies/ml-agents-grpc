@@ -200,6 +200,7 @@ namespace Grpc.Core.Internal
             internal static extern IntPtr dlsym(IntPtr handle, string symbol);
         }
 
+#if !UNITY_STANDALONE_WIN
         /// <summary>
         /// On Linux systems, using using dlopen and dlsym results in
         /// DllNotFoundException("libdl.so not found") if libc6-dev
@@ -207,7 +208,6 @@ namespace Grpc.Core.Internal
         /// dlopen and dlsym from the current process as on Linux
         /// Mono sure is linked against these symbols.
         /// </summary>
-#if !UNITY_STANDALONE_WIN
         private static class Mono
         {
             [DllImport("__Internal")]
