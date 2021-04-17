@@ -13,7 +13,7 @@ commands:
     sudo apt install -y golang
     sudo apt install -y build-essential autoconf libtool pkg-config
     git submodule update --init
-    ./unity/build_grpc_mac_linux.sh linux x86_64
+    ./unity/build_grpc_mac_linux.sh linux x86_64 x86
 artifacts:
   libraries:
     paths:
