@@ -1,6 +1,41 @@
 #!/bin/bash
-# make sure an argument is passed
+
+# exit on failed command and show commands that are executed
 set -oe xtrace
+
+undo_patch_before_exit()
+{
+    WORKING_DIR=$(pwd)
+    if [[ "$WORKING_DIR" =~ "ssl" ]]; then
+        git checkout .
+    elif [[ "$WORKING_DIR" =~ "cmake/build" ]]; then
+        cd ../../third_party/boringssl/
+        git checkout .
+    else
+        cd third_party/boringssl
+        git checkout .
+    fi
+}
+
+trap undo_patch_before_exit EXIT
+
+POSITIONAL=()
+while [[ $# -gt 0 ]]
+do
+key="$1"
+
+case $key in
+    -d|--delete-artifacts)
+    DELETE_ARTIFACTS="true"
+    shift # past argument
+    ;;
+    *)    # unknown option
+    POSITIONAL+=("$1") # save it in an array for later
+    shift # past argument
+    ;;
+esac
+done
+set -- "${POSITIONAL[@]}" # restore positional parameters
 
 platform=$1
 arches=${@:2}
@@ -9,7 +44,9 @@ pushd third_party/boringssl/
 git apply ../../unity/bssl-01.patch
 popd
 
-rm -rf artifacts ||:
+if [ "$DELETE_ARTIFACTS" == "true" ]; then
+    rm -rf artifacts ||:
+fi
 
 if [ "$platform" != "win" ]; then
     for arch in $arches; do

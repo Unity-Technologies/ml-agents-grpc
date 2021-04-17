@@ -9,6 +9,7 @@ commands:
     wget -q -0 dotnet-install.sh https://dot.net/v1/dotnet-install.sh
     bash dotnet-install.sh
     rm dotnet-install.sh
+    sudo apt-get update
     sudo apt install -y golang
     sudo apt install -y build-essential autoconf libtool pkg-config
     git submodule update --init
