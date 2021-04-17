@@ -59,6 +59,7 @@ fi
 rm -rf $dll_out
 mkdir -p $dll_out
 pushd src/csharp
+dotnet --version
 dotnet build Grpc.Core/Grpc.Core.csproj --configuration $configuration --output ../../$dll_out
 popd
 
