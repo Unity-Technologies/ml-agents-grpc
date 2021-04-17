@@ -1,4 +1,4 @@
-name: Build gRPC x86_64/arm64 Universal Library
+name: Build gRPC Win
 agent:
   type: Unity::VM
   image: desktop/desktop-vs2017:v0.1.0-602685
