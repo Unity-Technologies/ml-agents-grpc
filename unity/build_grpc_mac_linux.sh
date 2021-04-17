@@ -9,11 +9,13 @@ pushd third_party/boringssl/
 git apply ../../unity/bssl-01.patch
 popd
 
+rm -rf artifacts ||:
+
 if [ "$platform" != "win" ]; then
     for arch in $arches; do
         # start building with cmake
         # https://grpc.io/docs/languages/cpp/quickstart/
-        rm -rf cmake/build
+        rm -rf cmake/build ||:
         mkdir -p cmake/build
         pushd cmake/build || exit
         cmake -DgRPC_BUILD_TESTS=1 \
@@ -24,12 +26,12 @@ if [ "$platform" != "win" ]; then
         -DRUN_HAVE_POSIX_REGEX=1 \
         -DRUN_HAVE_STEADY_CLOCK=0 \
         ../..
-        make -j8
+        make grpc_csharp_ext -j8
         popd || exit
         
         # copy the file we want into the artifacts folder
         mkdir -p artifacts/native/$platform/grpc_$arch/
-        rm artifacts/native/$platform/grpc_$arch/libgrpc_csharp_ext.dylib
+        rm artifacts/native/$platform/grpc_$arch/libgrpc_csharp_ext.dylib ||:
         cp cmake/build/libgrpc_csharp_ext.dylib artifacts/native/$platform/grpc_$arch/libgrpc_csharp_ext.dylib
     done
     
@@ -54,7 +56,7 @@ if [ "$platform" == "win" ]; then
     configuration="Release_Win"
 fi
 
-rm -rf $dll_out
+rm -rf $dll_out ||:
 mkdir -p $dll_out
 pushd src/csharp
 dotnet --version
