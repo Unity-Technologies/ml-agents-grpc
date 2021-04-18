@@ -7,7 +7,7 @@ commands:
   - |
     sudo apt install -y cmake
     wget -q -0 dotnet-install.sh https://dot.net/v1/dotnet-install.sh
-    bash dotnet-install.sh
+    sudo dotnet-install.sh
     rm dotnet-install.sh
     sudo apt-get update
     sudo apt install -y golang
