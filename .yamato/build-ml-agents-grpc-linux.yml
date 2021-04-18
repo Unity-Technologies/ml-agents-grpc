@@ -7,6 +7,7 @@ commands:
   - |
     sudo apt install -y cmake
     wget -q -O dotnet-install.sh https://dot.net/v1/dotnet-install.sh
+    chmod +x dotnet-install.sh 
     sudo ./dotnet-install.sh --version 5.0.202
     rm dotnet-install.sh
     sudo apt-get update
