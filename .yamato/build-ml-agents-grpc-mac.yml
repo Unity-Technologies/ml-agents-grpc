@@ -1,13 +1,10 @@
 name: Build gRPC Mac
 agent:
   type: Unity::VM::osx
-  image: desktop/unity-macos-10.15-xcode-12.2:stable
+  image:  ml-agents/ml-agents-grpc-builder-mac:latest
   flavor: b1.medium
 commands:
   - |
-    HOMEBREW_NO_AUTO_UPDATE=1 brew install autoconf libtool go
-    brew install --cask cmake
-    brew install --cask dotnet-sdk
     git submodule update --init
     ./unity/build_grpc_mac_linux.sh mac arm64 x86_64
     ./unity/build_grpc_mac_linux.sh win
