@@ -7,7 +7,7 @@ commands:
   - |
     choco install nasm
     choco install ninja
-    choco install perl
+    choco install strawberryperl
     git submodule update --init
     md artifacts\native\win
     cd cmake
