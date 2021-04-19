@@ -8,6 +8,7 @@ commands:
     choco install nasm
     choco install ninja
     choco install strawberryperl
+    choco install golang
     git submodule update --init
     md artifacts\native\win
     cd cmake
