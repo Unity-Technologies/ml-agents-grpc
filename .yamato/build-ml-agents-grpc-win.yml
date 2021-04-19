@@ -9,6 +9,7 @@ commands:
     choco install ninja
     choco install strawberryperl
     choco install golang
+    refreshenv
     git submodule update --init
     md artifacts\native\win
     cd cmake
