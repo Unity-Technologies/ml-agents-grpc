@@ -13,7 +13,7 @@ commands:
     call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\VC\Auxiliary\Build\vcvarsall.bat" x64
     call "%VS150COMNTOOLS%..\..\VC\vcvarsall.bat" x64
     cmake ..\.. -GNinja -DCMAKE_BUILD_TYPE=Release
-    cmake --target grpc_csharp_ext
+    cmake --build . --target grpc_csharp_ext
     move *.dll ..\..\artifacts\native\win\
 artifacts:
   libraries:
