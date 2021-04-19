@@ -1,15 +1,10 @@
 name: Build gRPC Win
 agent:
   type: Unity::VM
-  image: desktop/desktop-vs2017:v0.1.0-602685
+  image: ml-agents/ml-agents-grpc-builder-win:latest
   flavor: b1.large
 commands:
   - |
-    choco install nasm
-    choco install ninja
-    choco install strawberryperl
-    choco install golang
-    refreshenv
     git submodule update --init
     md artifacts\native\win
     cd cmake
