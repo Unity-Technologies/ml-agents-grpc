@@ -12,7 +12,7 @@ commands:
     cd .build
     call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\VC\Auxiliary\Build\vcvarsall.bat" x64
     call "%VS150COMNTOOLS%..\..\VC\vcvarsall.bat" x64
-    cmake ..\.. -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=ON
+    cmake .. -GNinja -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=ON
     cmake --build .
     copy *.dll ..\..\artifacts\native\win\
 artifacts:
