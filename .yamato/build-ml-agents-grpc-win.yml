@@ -11,7 +11,7 @@ commands:
     md artifacts\native\win
     md .build
     cd .build
-    cmake .. -GNinja -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=ON
+    cmake .. -GNinja -DCMAKE_BUILD_TYPE=Release
     cmake --build .
     copy *.dll ..\artifacts\native\win\
 artifacts:
