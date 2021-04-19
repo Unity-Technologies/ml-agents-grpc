@@ -12,9 +12,9 @@ commands:
     cd build
     call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\VC\Auxiliary\Build\vcvarsall.bat" x64
     call "%VS150COMNTOOLS%..\..\VC\vcvarsall.bat" x64
-    cmake ..\.. -GNinja -DCMAKE_BUILD_TYPE=Release
-    cmake --build . --target grpc_csharp_ext
-    move *.dll ..\..\artifacts\native\win\
+    cmake ..\.. -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=ON
+    cmake --build .
+    copy *.dll ..\..\artifacts\native\win\
 artifacts:
   libraries:
     paths:
