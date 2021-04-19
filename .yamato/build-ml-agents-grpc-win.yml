@@ -13,7 +13,7 @@ commands:
     cd .build
     cmake .. -GNinja -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=ON
     cmake --build .
-    copy *.dll ..\..\artifacts\native\win\
+    copy *.dll ..\artifacts\native\win\
 artifacts:
   libraries:
     paths:
