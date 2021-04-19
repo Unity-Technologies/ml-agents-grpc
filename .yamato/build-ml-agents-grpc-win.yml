@@ -8,9 +8,9 @@ commands:
     choco install nasm
     choco install ninja
     git submodule update --init
+    md artifacts\native\win
     cd cmake
     md build
-    md artifacts\native\win
     cd build
     call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\Tools\VsDevCmd.bat"
     call "%VS150COMNTOOLS%..\..\VC\vcvarsall.bat" x64
