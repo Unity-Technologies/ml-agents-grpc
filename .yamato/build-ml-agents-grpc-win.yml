@@ -8,8 +8,8 @@ commands:
     git submodule update --init
     md artifacts\native\win
     cd cmake
-    md build
-    cd build
+    md .build
+    cd .build
     call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\VC\Auxiliary\Build\vcvarsall.bat" x64
     call "%VS150COMNTOOLS%..\..\VC\vcvarsall.bat" x64
     cmake ..\.. -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=ON
