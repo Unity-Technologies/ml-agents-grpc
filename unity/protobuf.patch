@@ -1,0 +1,12 @@
+diff --git a/src/Makefile.am b/src/Makefile.am
+index 1d651dc8c..b62930093 100644
+--- a/src/Makefile.am
++++ b/src/Makefile.am
+@@ -722,7 +722,6 @@ protoc_outputs =                                                  \
+   google/protobuf/util/message_differencer_unittest.pb.cc         \
+   google/protobuf/util/message_differencer_unittest.pb.h
+ 
+-BUILT_SOURCES = $(protoc_outputs) google/protobuf/compiler/js/well_known_types_embed.cc
+ 
+ if USE_EXTERNAL_PROTOC
+ 
