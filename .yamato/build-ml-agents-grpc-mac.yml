@@ -1,0 +1,14 @@
+name: Build gRPC Mac
+agent:
+  type: Unity::VM::osx
+  image:  ml-agents/ml-agents-grpc-builder-mac:latest
+  flavor: b1.medium
+commands:
+  - |
+    git submodule update --init
+    ./unity/build_grpc_mac_linux.sh mac arm64 x86_64
+    ./unity/build_grpc_mac_linux.sh win
+artifacts:
+  libraries:
+    paths:
+      - "artifacts/**"

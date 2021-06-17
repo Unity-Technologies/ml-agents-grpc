@@ -92,6 +92,7 @@ namespace Grpc.Core.Internal
                     return IntPtr.Zero;
                 }
             }
+#if !UNITY_STANDALONE_WIN
             if (PlatformApis.IsLinux)
             {
                 if (PlatformApis.IsMono)
@@ -108,6 +109,7 @@ namespace Grpc.Core.Internal
             {
                 return MacOSX.dlsym(this.handle, symbolName);
             }
+#endif
             throw new InvalidOperationException("Unsupported platform.");
         }
 
@@ -135,6 +137,7 @@ namespace Grpc.Core.Internal
             {
                 return Windows.LoadLibrary(libraryPath);
             }
+#if !UNITY_STANDALONE_WIN
             if (PlatformApis.IsLinux)
             {
                 if (PlatformApis.IsMono)
@@ -151,6 +154,7 @@ namespace Grpc.Core.Internal
             {
                 return MacOSX.dlopen(libraryPath, RTLD_GLOBAL + RTLD_LAZY);
             }
+#endif
             throw new InvalidOperationException("Unsupported platform.");
         }
 
@@ -196,6 +200,7 @@ namespace Grpc.Core.Internal
             internal static extern IntPtr dlsym(IntPtr handle, string symbol);
         }
 
+#if !UNITY_STANDALONE_WIN
         /// <summary>
         /// On Linux systems, using using dlopen and dlsym results in
         /// DllNotFoundException("libdl.so not found") if libc6-dev
@@ -211,6 +216,7 @@ namespace Grpc.Core.Internal
             [DllImport("__Internal")]
             internal static extern IntPtr dlsym(IntPtr handle, string symbol);
         }
+#endif
 
         /// <summary>
         /// Similarly as for Mono on Linux, we load symbols for

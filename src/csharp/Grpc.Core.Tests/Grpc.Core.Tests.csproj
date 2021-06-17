@@ -9,6 +9,8 @@
     <OutputType>Exe</OutputType>
     <PackageId>Grpc.Core.Tests</PackageId>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <Configurations>Debug;Release;Release_Win</Configurations>
+    <Platforms>AnyCPU</Platforms>
   </PropertyGroup>
 
   <ItemGroup>

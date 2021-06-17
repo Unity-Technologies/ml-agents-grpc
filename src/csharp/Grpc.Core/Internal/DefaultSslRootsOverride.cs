@@ -44,7 +44,8 @@ namespace Grpc.Core.Internal
                 var stream = typeof(DefaultSslRootsOverride).GetTypeInfo().Assembly.GetManifestResourceStream(RootsPemResourceName);
                 if (stream == null)
                 {
-                    throw new IOException(string.Format("Error loading the embedded resource \"{0}\"", RootsPemResourceName));   
+                    return;
+                    //throw new IOException(string.Format("Error loading the embedded resource \"{0}\"", RootsPemResourceName));   
                 }
                 using (var streamReader = new StreamReader(stream))
                 {

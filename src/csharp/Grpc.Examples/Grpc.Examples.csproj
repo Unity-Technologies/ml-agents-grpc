@@ -8,6 +8,8 @@
     <AssemblyName>Grpc.Examples</AssemblyName>
     <PackageId>Grpc.Examples</PackageId>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <Configurations>Debug;Release;Release_Win</Configurations>
+    <Platforms>AnyCPU</Platforms>
   </PropertyGroup>
 
   <ItemGroup>

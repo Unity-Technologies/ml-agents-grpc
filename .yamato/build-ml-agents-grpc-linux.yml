@@ -1,0 +1,21 @@
+name: Build gRPC Linux
+agent:
+  type: Unity::VM
+  image: package-ci/ubuntu:v1.3.1-719011
+  flavor: b1.medium
+commands:
+  - |
+    sudo apt install -y cmake
+    wget -q -O dotnet-install.sh https://dot.net/v1/dotnet-install.sh
+    chmod +x dotnet-install.sh 
+    sudo ./dotnet-install.sh --version 5.0.202
+    rm dotnet-install.sh
+    sudo apt-get update
+    sudo apt install -y golang
+    sudo apt install -y build-essential autoconf libtool pkg-config
+    git submodule update --init
+    ./unity/build_grpc_mac_linux.sh linux x86_64 x86
+artifacts:
+  libraries:
+    paths:
+      - "artifacts/**"
